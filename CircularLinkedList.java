@@ -9,6 +9,7 @@ package circularlinkedlist;
  *
  * @author Parisa Khan
  */
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,14 +18,14 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 	
 	
-	// Your variables
-	// You can include a reference to a tail if you want
+	//top of linked list
 	Node<E> head;
+	//bottom of linked list
         Node<E> tail;
-	 int size;  // BE SURE TO KEEP TRACK OF THE SIZE
+	 int size; 
       
 	
-	// implement this constructor
+	//constructor
 	public CircularLinkedList() {
             head = null;
             tail = null;
@@ -33,33 +34,26 @@ public class CircularLinkedList<E> implements Iterable<E> {
        
 
 
-	// writing helper functions for add and remove, like the book did can help
-	// but remember, the last element's next node will be the head!
-
-
-
 	// attach a node to the end of the list
-	// Be sure to handle the adding to an empty list
-	// always returns true 
+	// handle the adding to an empty list
+	// always returns true
+	//wrapper method for add
 	public boolean add(E e) {            
            add(size, e); 
             
         return true;
         }
            
-       
-        
 
-	
-	// need to handle
-	// out of bounds
+	// handles out of bounds
 	// empty list
 	// adding to front
 	// adding to middle
 	// adding to "end"
-	// REMEMBER TO INCREMENT THE SIZE
+	//adds to size
 	public boolean add(int index, E e){
             
+	 //throws exception if size is greater than index or if index is negative
             if(index < 0 || size > index )
             {
                 throw new IndexOutOfBoundsException("out of bounds:" + index);
@@ -88,7 +82,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
                 //circular
                 tail.next = head;
             }
-            //adding inmiddle
+            //adding in middle
             else { 
                 Node<E> after = getNode(index);
                 Node<E> beforeafter = getNode(index-1);
@@ -100,9 +94,9 @@ public class CircularLinkedList<E> implements Iterable<E> {
             return true;
 	}
 
-	// I highly recommend using this helper method
+
 	// Return Node<E> found at the specified index
-	// be sure to handle out of bounds cases
+	// handles out of bounds cases
 	private Node<E> getNode(int index ) {
            
             if (index < 0 || index > size) {
@@ -119,13 +113,13 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 	
 	
-	// remove must handle the following cases
+	// remove handles the following cases
 	// out of bounds
 	// removing the only thing in the list
 	// removing the first thing in the list (need to adjust the last thing in the list to point to the beginning)
 	// removing the last thing (if you have a tail)
 	// removing any other node.
-	// REMEMBER TO DECREMENT THE SIZE
+	// decrements size
 	public E remove(int index) {
             
 		if (index < 0 || index > size) {
@@ -134,19 +128,22 @@ public class CircularLinkedList<E> implements Iterable<E> {
                 }
      
         E item = null;
-           
-        if(size == 1) { // only 1 item
+          
+	//only 1 item in list
+        if(size == 1) {
            
             item =  head.getElement();
             head = null;
             tail = null;
-        } else if(index == 0) { // removing the head
+	//removes head
+        } else if(index == 0) { 
           
             item = head.getElement();
             head = head.next;
             tail.next = head;
          
-        } else if(index == size){ //removing tail
+	//removing tail
+        } else if(index == size){ 
            
             Node<E> beforetail = getNode(size-1);
             
@@ -154,7 +151,8 @@ public class CircularLinkedList<E> implements Iterable<E> {
             tail = beforetail.next;
             tail.next = head;
         } 
-        else{ //removing in the middle
+	//removing in the middle
+        else{ 
          
             Node<E> node = getNode(index);
             Node<E> beforenode = getNode(index-1);
@@ -169,7 +167,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	
 	
 	
-	// Turns your list into a string
+	// Turns  list into a string
 	// Useful for debugging
 	public String toString(){
 		Node<E> current =  head;
@@ -198,8 +196,6 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	
 	// provided code
 	// read the comments to figure out how this works and see how to use it
-	// you should not have to change this
-	// change at your own risk!
 	private class ListIterator<E> implements Iterator<E>{
 		
 		Node<E> nextItem;
@@ -231,6 +227,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	
 		}
 		
+		//provided code
 		// removed the last node was visted by the .next() call 
 		// for example if we had just created a iterator
 		// the following calls would remove the item at index 1 (the second person in the ring)
@@ -254,14 +251,14 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	}
 	
 	
-	// Solve the problem in the main method
+	// Solves the problem in the main method
 	// The answer of n = 13,  k = 2 is 
 	// the 11th person in the ring (index 10)
 	public static void main(String[] args){
             
 		CircularLinkedList<Integer> l =  new CircularLinkedList<Integer>();
                 //works for any n and any k
-		int n = 5;
+		int n = 13;
 		int k = 2;
 		
                 //adds values to list
@@ -289,7 +286,6 @@ public class CircularLinkedList<E> implements Iterable<E> {
                }
                              
 }
-
                 
 		
 		
