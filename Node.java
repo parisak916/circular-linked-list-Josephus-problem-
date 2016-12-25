@@ -20,29 +20,30 @@ public class Node<E> {
         
 	private E element;
 	Node<E> next;
-       // Node <E> prev;
+       
 	
 	
-	
+	//constructer
 	public Node() {
 		this.element = null;
 		this.next = null;
-                //this.prev = null;
+                
 		
 	}
 	
+	//constructer
 	public Node(E e) {
 		this.element = e;
 		this.next = null;
-               // this.prev = null;
+             
 	}
 	
-	
+	//gets E element
 	public E getElement() {
 		return this.element;
 	}
 	
-	
+	//sets E element
 	public void setElement(E element) {
 		this.element= element;
 	}
